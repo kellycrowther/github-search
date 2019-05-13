@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center">
   <div fxFlex="25%">
-    <search></search>
+    <search (searchTerm)="searchUsers($event)"></search>
   </div>
   <div fxFlex="75%">
     <div>

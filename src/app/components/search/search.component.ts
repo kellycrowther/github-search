@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchService } from 'src/app/services/search/search.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { startWith, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
+  @Output() public searchTerm: EventEmitter<string> = new EventEmitter();
   public search = new FormControl();
 
-  constructor(public searchService: SearchService) { }
+  constructor() { }
 
-  public onSearch(): Observable<any> {
-    return this.search.valueChanges.pipe(
+  public ngOnInit(): void {
+    this.search.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) => this.searchService.searchUsers(term))
-    );
+      distinctUntilChanged()
+    ).subscribe((term) => {
+      this.searchTerm.emit(term);
+    });
   }
-
 }

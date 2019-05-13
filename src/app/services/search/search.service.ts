@@ -9,7 +9,7 @@ export class SearchService {
 
   constructor(public data: GithubProviderService) { }
 
-  public getData(): Observable<any> {
-    return this.data.getRepo();
+  public searchUsers(query?: string): Observable<any> {
+    return this.data.searchUsers(query);
   }
 }

@@ -11,7 +11,7 @@ export class SearchPageComponent implements OnInit {
   constructor(public searchService: SearchService) { }
 
   ngOnInit() {
-    this.searchService.getData().subscribe((data) => {
+    this.searchService.searchUsers().subscribe((data) => {
       console.info('DATA: ', data);
     });
   }

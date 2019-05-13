@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -8,19 +8,23 @@ export class GithubProviderService {
 
   constructor(public http: HttpClient) { }
 
-  public getRepo(): Observable<any> {
-    return this.http.get('/repos/vmg/redcarpet/issues?state=closed')
+  public searchUsers(query?: string): Observable<any> {
+    let params = new HttpParams();
+    if (query) {
+      params = params.append('q', query);
+    }
+    return this.http.get('/search/users', { params })
       .pipe(
         map((data) => {
           if (!data) {
-            console.warn('GithubProviderService->getRepo() Invalid Data');
-            throwError('GithubProviderService->getRepo() Invalid Data');
+            console.warn('GithubProviderService->searchUsers() Invalid Data');
+            throwError('GithubProviderService->searchUsers() Invalid Data');
           }
           return data;
         }),
         catchError(e => {
-          console.error('GithubProviderService->getRepo() Error', e);
-          return throwError(e || 'Error getRepo()');
+          console.error('GithubProviderService->searchUsers() Error', e);
+          return throwError(e || 'Error searchUsers()');
         }));
   }
 }

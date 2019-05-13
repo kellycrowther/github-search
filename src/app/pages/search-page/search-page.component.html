@@ -1,6 +1,7 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center">
   <div fxFlex="25%">
     <search (searchTerm)="searchUsers($event)"></search>
+    <div>Total Count: {{(users$ | async)?.total_count}}</div>
   </div>
   <div fxFlex="75%">
     <user-card *ngFor="let user of (users$ | async)?.items" [user]="user"></user-card>

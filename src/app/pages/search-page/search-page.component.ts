@@ -16,6 +16,9 @@ export class SearchPageComponent {
 
   public searchUsers(query: string): void {
     this.users$ = this.searchService.searchUsers(query);
+    this.users$.subscribe((data) => {
+      console.info('USER DATA: ', data);
+    });
   }
 
 }

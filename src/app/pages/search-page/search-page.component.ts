@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/services/search/search.service';
 import { Observable } from 'rxjs';
+import { IUserResults } from 'src/app/models/user';
 
 @Component({
   selector: 'search-page',
@@ -9,13 +10,12 @@ import { Observable } from 'rxjs';
 })
 export class SearchPageComponent {
 
-  public users$: Observable<any>;
+  public users$: Observable<IUserResults>;
 
   constructor(public searchService: SearchService) { }
 
   public searchUsers(query: string): void {
     this.users$ = this.searchService.searchUsers(query);
-    this.users$.subscribe((data) => console.info('users: ', data));
   }
 
 }

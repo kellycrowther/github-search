@@ -4,6 +4,7 @@ import { SearchPageComponent } from './search-page.component';
 import { SearchServiceModule } from 'src/app/services/search/search.service.module';
 import { SearchModule } from 'src/app/components/search/search.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { UserCardModule } from 'src/app/components/user-card/user-card.module';
 
 @NgModule({
   declarations: [SearchPageComponent],
@@ -11,7 +12,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     SearchServiceModule,
     SearchModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    UserCardModule
   ],
   exports: [SearchPageComponent]
 })

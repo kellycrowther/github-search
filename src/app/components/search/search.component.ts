@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
 
   public ngOnInit(): void {
     this.search.valueChanges.pipe(
-      startWith(''),
+      startWith('kelly'),
       debounceTime(300),
       distinctUntilChanged()
     ).subscribe((term) => {

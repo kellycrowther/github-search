@@ -10,9 +10,9 @@ export class SearchService {
 
   constructor(public data: GithubProviderService) { }
 
-  public searchUsers(query?: string): Observable<IUserResults> {
+  public searchUsers(query?: string, page?: number, perPage?: string): Observable<IUserResults> {
     if (query.trim().length > 0) {
-      return this.data.searchUsers(query);
+      return this.data.searchUsers(query, page, perPage);
     } else {
       return of(null);
     }

@@ -1,24 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/services/search/search.service';
 import { Observable } from 'rxjs';
-import { IUserResults } from 'src/app/models/user';
+import { IUserResults, IUser } from 'src/app/models/user';
+import { PaginationInstance } from 'ngx-pagination';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent {
+export class SearchPageComponent implements OnInit {
 
+  public query: string;
+  public totalCount: number;
+  public currentPage = 1;
   public users$: Observable<IUserResults>;
 
   constructor(public searchService: SearchService) { }
 
-  public searchUsers(query: string): void {
-    this.users$ = this.searchService.searchUsers(query);
-    this.users$.subscribe((data) => {
-      console.info('USER DATA: ', data);
-    });
+  public ngOnInit(): void {
+    this.searchUsers('');
+  }
+
+  public searchUsers(query: string, page?: number, perPage?: string): void {
+    this.query = query;
+    if (page) {
+      this.currentPage = page;
+    }
+    this.users$ = this.searchService.searchUsers(this.query, this.currentPage, perPage).pipe(
+      tap((userResults: IUserResults) => {
+        if (userResults) {
+          this.totalCount = userResults.total_count;
+        }
+      })
+    );
   }
 
 }

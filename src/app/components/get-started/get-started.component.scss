@@ -1,0 +1,23 @@
+@keyframes flow {
+  0% {
+    transform: scale(.9, .9) translate(0px, 0px);
+    opacity: .1;
+  }
+
+  50% {
+    transform: scale(1.1, 1.1) translate(-25px, 0px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.1, 1.1) translate(-25px, 0px);
+    opacity: 0;
+  }
+}
+.grow-arrow {
+  animation: flow 5s infinite;
+}
+
+.fa-arrow-left {
+  font-size: 30px;
+}

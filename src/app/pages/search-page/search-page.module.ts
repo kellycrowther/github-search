@@ -6,6 +6,7 @@ import { SearchModule } from 'src/app/components/search/search.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserCardModule } from 'src/app/components/user-card/user-card.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { GetStartedModule } from 'src/app/components/get-started/get-started.module';
 
 @NgModule({
   declarations: [SearchPageComponent],
@@ -15,7 +16,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SearchModule,
     FlexLayoutModule,
     UserCardModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    GetStartedModule
   ],
   exports: [SearchPageComponent]
 })

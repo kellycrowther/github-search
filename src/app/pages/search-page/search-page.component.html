@@ -8,6 +8,7 @@
     </pagination-controls>
   </div>
   <div fxFlex="75%">
+    <get-started *ngIf="!hasSearched"></get-started>
     <user-card *ngFor="let user of (users$ | async)?.items | paginate: { id: 'server', itemsPerPage: 10, currentPage: currentPage, totalItems: totalCount }" [user]="user"></user-card>
   </div>
 </div>

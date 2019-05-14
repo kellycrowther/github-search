@@ -16,6 +16,7 @@ export class SearchPageComponent implements OnInit {
   public totalCount: number;
   public currentPage = 1;
   public users$: Observable<IUserResults>;
+  public hasSearched = false;
 
   constructor(public searchService: SearchService) { }
 
@@ -32,6 +33,7 @@ export class SearchPageComponent implements OnInit {
       tap((userResults: IUserResults) => {
         if (userResults) {
           this.totalCount = userResults.total_count;
+          this.hasSearched = true;
         }
       })
     );

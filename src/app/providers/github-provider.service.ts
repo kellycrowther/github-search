@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { IUserResults } from '../models/user';
+import { IUserResults, IUserDetail } from '../models/user';
 
 @Injectable()
 export class GithubProviderService {
@@ -29,6 +29,25 @@ export class GithubProviderService {
         catchError(e => {
           console.error('GithubProviderService->searchUsers() Error', e);
           return throwError(e || 'Error searchUsers()');
+        }));
+  }
+
+  public getUserDetail(user: string): Observable<IUserDetail> {
+    let params = new HttpParams();
+    params = params.append('client_id', 'a1931bea2198da57172c');
+    params = params.append('client_secret', '5e45a309348e005bd77897a98b94dea9ca48c5aa');
+    return this.http.get(`/users/${user}`)
+      .pipe(
+        map((data: any) => {
+          if (!data) {
+            console.warn('GithubProviderService->getUserDetail() Invalid Data');
+            throwError('GithubProviderService->getUserDetail() Invalid Data');
+          }
+          return data;
+        }),
+        catchError(e => {
+          console.error('GithubProviderService->getUserDetail() Error', e);
+          return throwError(e || 'Error getUserDetail()');
         }));
   }
 }

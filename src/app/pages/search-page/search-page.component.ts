@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/services/search/search.service';
 import { Observable } from 'rxjs';
-import { IUserResults, IUser } from 'src/app/models/user';
-import { PaginationInstance } from 'ngx-pagination';
+import { IUserResults } from 'src/app/models/user';
 import { tap } from 'rxjs/operators';
 
 @Component({

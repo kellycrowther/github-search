@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IUser } from 'src/app/models/user';
+import { IUser, IUserDetail } from 'src/app/models/user';
+import { SearchService } from 'src/app/services/search/search.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'user-card',
@@ -9,11 +11,12 @@ import { IUser } from 'src/app/models/user';
 export class UserCardComponent implements OnInit {
 
   @Input() public user: IUser;
+  public userDetail$: Observable<IUserDetail>;
 
-  constructor() { }
+  constructor(public searchService: SearchService) { }
 
   public ngOnInit(): void {
-    console.info('USER: ', this.user);
+    this.userDetail$ = this.searchService.getUserDetail(this.user.login);
   }
 
   public goToUser(url: string): void {

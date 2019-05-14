@@ -1,15 +1,30 @@
 <mat-card class="example-card">
   <mat-card-header>
     <img mat-card-avatar [src]="user?.avatar_url" alt="Photo of a Shiba Inu">
-    <mat-card-title>{{user?.login}}</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    <mat-card-title>{{ (userDetail$ | async)?.name }}</mat-card-title>
+    <mat-card-subtitle>{{ (userDetail$ | async)?.bio }}</mat-card-subtitle>
+    <mat-card-subtitle>
+      <i class="fas fa-map-marker-alt"></i>
+      {{ (userDetail$ | async)?.location }}
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
+    <div class="detail-container">
+      <i class="fas fa-users"></i>
+      <span class="detail">Followers: {{ (userDetail$ | async)?.followers }}</span>
+    </div>
+    <div *ngIf="(userDetail$ | async)?.company.length > 0" class="detail-container">
+      <i class="fas fa-building"></i>
+      <span class="detail">Company: {{ (userDetail$ | async)?.company }}</span>
+    </div>
+    <div class="detail-container">
+      <i class="fas fa-code-branch"></i>
+      <span class="detail">Public Repositories: {{ (userDetail$ | async)?.public_repos }}</span>
+    </div>
+    <div class="detail-container">
+      <i class="far fa-calendar-alt"></i>
+      <span class="detail">Joined: {{ (userDetail$ | async)?.created_at | date:'MM-dd-yyyy' }}</span>
+    </div>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="accent" (click)="goToUser(user.html_url)">Go To Profile</button>

@@ -27,7 +27,6 @@ export class SearchPageComponent {
     }
     this.users$ = this.searchService.searchUsers(this.query, this.currentPage, perPage).pipe(
       tap((userResults: IUserResults) => {
-        console.log('test');
         if (userResults) {
           this.totalCount = userResults.total_count;
           this.hasSearched = true;

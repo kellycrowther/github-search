@@ -15,7 +15,7 @@ export class SearchService {
     if (query.trim().length > 0) {
       return this.data.searchUsers(query, page, perPage).pipe(shareReplay(1));
     } else {
-      return of(null);
+      return of({ total_count: 0, incomplete_results: true, items: []} as IUserResults);
     }
   }
 

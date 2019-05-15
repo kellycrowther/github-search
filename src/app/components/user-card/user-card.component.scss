@@ -1,3 +1,11 @@
+mat-card {
+  margin: 10px;
+  max-width: 60%;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .4),
+  0 1px 1px 0 rgba(0, 0, 0, 0.32),
+  0 1px 3px 0 rgba(0, 0, 0, .32);
+}
+
 .detail-container {
   margin-top: 10px;
 }

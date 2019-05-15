@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { SearchService } from 'src/app/services/search/search.service';
 import { Observable } from 'rxjs';
 import { IUserResults } from 'src/app/models/user';
@@ -7,9 +7,10 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'search-page',
   templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.scss']
+  styleUrls: ['./search-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent {
 
   public query: string;
   public totalCount: number;
@@ -19,10 +20,6 @@ export class SearchPageComponent implements OnInit {
 
   constructor(public searchService: SearchService) { }
 
-  public ngOnInit(): void {
-    this.searchUsers('');
-  }
-
   public searchUsers(query: string, page?: number, perPage?: string): void {
     this.query = query;
     if (page) {
@@ -30,6 +27,7 @@ export class SearchPageComponent implements OnInit {
     }
     this.users$ = this.searchService.searchUsers(this.query, this.currentPage, perPage).pipe(
       tap((userResults: IUserResults) => {
+        console.log('test');
         if (userResults) {
           this.totalCount = userResults.total_count;
           this.hasSearched = true;

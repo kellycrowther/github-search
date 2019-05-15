@@ -5,6 +5,7 @@ import { HttpRequest } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
 import { HttpEvent } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import config from '../../assets/config.json';
 
 const baseURL = 'https://api.github.com';
 
@@ -19,6 +20,8 @@ export class AuthInterceptor implements HttpInterceptor {
       headerSettings[key] = request.headers.getAll(key);
     }
     headerSettings['Content-Type'] = 'application/json';
+    // tslint:disable-next-line:no-string-literal
+    headerSettings['Authorization'] = 'token ' + config.token;
     const newHeader = new HttpHeaders(headerSettings);
 
     changedRequest = request.clone({

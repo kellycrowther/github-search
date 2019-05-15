@@ -3,7 +3,7 @@
     <img mat-card-avatar [src]="user?.avatar_url" alt="Photo of a Shiba Inu">
     <mat-card-title>{{ (userDetail$ | async)?.name }}</mat-card-title>
     <mat-card-subtitle>{{ (userDetail$ | async)?.bio }}</mat-card-subtitle>
-    <mat-card-subtitle>
+    <mat-card-subtitle *ngIf="(userDetail$ | async)?.location">
       <i class="fas fa-map-marker-alt"></i>
       {{ (userDetail$ | async)?.location }}
     </mat-card-subtitle>
@@ -13,7 +13,7 @@
       <i class="fas fa-users"></i>
       <span class="detail">Followers: {{ (userDetail$ | async)?.followers }}</span>
     </div>
-    <div *ngIf="(userDetail$ | async)?.company.length > 0" class="detail-container">
+    <div *ngIf="(userDetail$ | async)?.company && (userDetail$ | async)?.company.length > 0" class="detail-container">
       <i class="fas fa-building"></i>
       <span class="detail">Company: {{ (userDetail$ | async)?.company }}</span>
     </div>

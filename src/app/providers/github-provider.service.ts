@@ -9,14 +9,12 @@ export class GithubProviderService {
 
   constructor(public http: HttpClient) { }
 
-  public searchUsers(query: string = '', page: number, perPage: string): Observable<IUserResults> {
+  public searchUsers(query: string, page: number, perPage: string): Observable<IUserResults> {
     let params = new HttpParams();
-    params = params.append('client_id', 'a1931bea2198da57172c');
-    params = params.append('client_secret', '5e45a309348e005bd77897a98b94dea9ca48c5aa');
-    query = encodeURIComponent(query).replace(/%20/g, '+');
-    params = params.append('q', query);
-    params = params.append('page', page.toString());
-    params = params.append('per_page', perPage);
+    params = page ? params.append('q', query) : params;
+    params = page ? params.append('page', page.toString()) : params;
+    params = page ? params.append('perPage', perPage) : params;
+
     return this.http.get('/search/users', { params })
       .pipe(
         map((data: IUserResults) => {
@@ -33,9 +31,6 @@ export class GithubProviderService {
   }
 
   public getUserDetail(user: string): Observable<IUserDetail> {
-    let params = new HttpParams();
-    params = params.append('client_id', 'a1931bea2198da57172c');
-    params = params.append('client_secret', '5e45a309348e005bd77897a98b94dea9ca48c5aa');
     return this.http.get(`/users/${user}`)
       .pipe(
         map((data: any) => {

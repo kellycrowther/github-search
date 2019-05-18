@@ -5,7 +5,7 @@ import { HttpRequest } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
 import { HttpEvent } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import config from '../../assets/config.json';
+import config from '../../assets/configuration.json';
 
 const baseURL = 'https://api.github.com';
 
